@@ -79,9 +79,19 @@ public:
     // Input: word to search for (string)
     // Output: boolean indicating if the word exists
     // Purpose: Check if the complete word exists in the Trie
-    bool search(string word) {
-        // TODO: Implement this function
-        return false; // placeholder
+    bool search(string word) {//app
+        TrieNode* current = root;
+        for (int i=0;i<word.length();i++) {
+            int ind = word[i] - 'a';
+            if (!current->children[ind]) {
+                return false;
+            }
+            current = current->children[ind];
+        }
+        if (current->isEndOfWord) {
+            return true;
+        }
+        return false;
     }
 
     // Check if any word starts with the given prefix
