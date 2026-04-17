@@ -107,11 +107,21 @@ public:
     // Input: prefix to complete (string)
     // Output: vector of strings that start with the prefix
     // Purpose: Find all complete words that begin with the given prefix
-    vector<string> autocomplete(string prefix) {
-        vector<string> suggestions;
-        // TODO: Implement this function
-        return suggestions;
+   vector<string> autocomplete(string prefix) {
+    vector<string> suggestions;
+    TrieNode* current = root;
+
+    for (char ch : prefix) {
+        int index = ch - 'a';
+        if (current->children[index] == nullptr) {
+            return suggestions;
+        }
+        current = current->children[index];
     }
+
+    findAllWords(current, prefix, suggestions);
+    return suggestions;
+}
 };
 
 // Main function
